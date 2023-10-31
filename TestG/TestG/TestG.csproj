@@ -2028,13 +2028,11 @@
     <Content Include="Acsset\AccssetAdmin\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="Acsset\AccssetAdmin\vendor\jquery\jquery.min.map" />
     <Content Include="Acsset\AccssetAdmin\vendor\jquery\jquery.slim.min.map" />
-    <Content Include="Areas\adminarea\Views\HomeAdmin\IndexAdmin.cshtml" />
     <Content Include="Areas\adminarea\Views\HomeAdmin\NavPartialAdmin.cshtml" />
     <Content Include="Areas\adminarea\Views\HomeAdmin\MenuPartialAdmin.cshtml" />
     <Content Include="Areas\adminarea\Views\HomeAdmin\FooterPartialAdmin.cshtml" />
     <Content Include="Areas\adminarea\Views\HomeAdmin\DanhNhap.cshtml" />
     <Content Include="Areas\adminarea\Views\User\DangKy.cshtml" />
-    <Content Include="Areas\adminarea\Views\User\DangNhap.cshtml" />
     <Content Include="Areas\adminarea\Views\User\QuenMatKhau.cshtml" />
     <Content Include="Areas\adminarea\Views\HomeAdmin\TaoTaiKhoan.cshtml" />
     <Content Include="Areas\adminarea\Views\HomeAdmin\QuenMatKhau.cshtml" />
@@ -2045,6 +2043,8 @@
     </Content>
     <Content Include="Areas\adminarea\Views\User\DoiMatKhau.cshtml" />
     <Content Include="Areas\adminarea\Views\DichVu\Index.cshtml" />
+    <Content Include="Areas\adminarea\Views\HomeAdmin\IndexAdmin.cshtml" />
+    <Content Include="Areas\adminarea\Views\User\DangNhap.cshtml" />
     <None Include="Models\QuanLyGaraa.dbml.layout">
       <DependentUpon>QuanLyGaraa.dbml</DependentUpon>
     </None>

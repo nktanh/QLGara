@@ -16,7 +16,7 @@ namespace TestG
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "HomeAdmin", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "HomeAdmin", action = "IndexAdmin", id = UrlParameter.Optional }
             );
 
         }

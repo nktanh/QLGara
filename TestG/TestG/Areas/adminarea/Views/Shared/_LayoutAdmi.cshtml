@@ -35,7 +35,7 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-            @Html.Partial("MenuPartialAdmin")
+            @Html.Action("MenuPartialAdmin", "HomeAdmin")
             <!-- End of Sidebar -->
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
@@ -44,22 +44,22 @@
                 <div id="content">
 
                     <!-- Topbar -->
-              @Html.Partial("NavPartialAdmin")     
+                    @Html.Action("NavPartialAdmin", "HomeAdmin")
                     <!-- End of Topbar -->
                     <!-- Begin Page Content -->
                     <div>
                         @RenderBody()
                     </div>
-                    </div>
-                    <!-- End of Main Content -->
-                    <!-- Footer -->
-                    @Html.Partial("FooterPartialAdmin")
-                    <!-- End of Footer -->
-
                 </div>
-                <!-- End of Content Wrapper -->
+                <!-- End of Main Content -->
+                <!-- Footer -->
+                @Html.Action("FooterPartialAdmin", "HomeAdmin")
+                <!-- End of Footer -->
 
             </div>
+            <!-- End of Content Wrapper -->
+
+        </div>
         <!-- End of Page Wrapper -->
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
@@ -102,7 +102,7 @@
         <!-- Page level custom scripts -->
         <script src="~/Acsset/AccssetAdmin/js/demo/chart-area-demo.js"></script>
         <script src="~/Acsset/AccssetAdmin/js/demo/chart-pie-demo.js"></script>
-
+        @RenderSection("scrips", required: false)
     </body>
 
 </html>

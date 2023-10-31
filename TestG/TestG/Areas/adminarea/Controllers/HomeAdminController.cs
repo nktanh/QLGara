@@ -13,8 +13,8 @@ namespace TestG.Areas.adminarea.Controllers
         {
             if (Session["user"] == null)
             {
-                return RedirectToAction("DangNhap","User");
-            } 
+                return RedirectToAction("DangNhap", "User");
+            }
 
             return View();
         }

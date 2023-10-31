@@ -9,6 +9,20 @@
       <Association Name="ThuongHieuXe_ChiTietDoanhThu" Member="ThuongHieuXe" ThisKey="IDHangXe" OtherKey="IDThuongHieuXe" Type="ThuongHieuXe" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.VatTu" Member="VatTus">
+    <Type Name="VatTu">
+      <Column Name="IDVatTu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Gia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Anh" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="IDHangXe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="VatTu_ChiTietSuaChua" Member="ChiTietSuaChuas" ThisKey="IDVatTu" OtherKey="IDMaVatTu" Type="ChiTietSuaChua" />
+      <Association Name="VatTu_CTNhapKho" Member="CTNhapKhos" ThisKey="IDVatTu" OtherKey="IDVatTu" Type="CTNhapKho" />
+      <Association Name="VatTu_CTTonKho" Member="CTTonKhos" ThisKey="IDVatTu" OtherKey="IDVatTu" Type="CTTonKho" />
+      <Association Name="ThuongHieuXe_VatTu" Member="ThuongHieuXe" ThisKey="IDHangXe" OtherKey="IDThuongHieuXe" Type="ThuongHieuXe" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.ChiTietSuaChua" Member="ChiTietSuaChuas">
     <Type Name="ChiTietSuaChua">
       <Column Name="IDSuaChu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -20,9 +34,9 @@
       <Column Name="TongTien" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IDUser" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IDTienCong" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="SuaChua_ChiTietSuaChua" Member="SuaChua" ThisKey="IDMaSuaChu" OtherKey="IDMaSuaChua" Type="SuaChua" IsForeignKey="true" />
-      <Association Name="TienCong_ChiTietSuaChua" Member="TienCong" ThisKey="IDTienCong" OtherKey="IDTienCong" Type="TienCong" IsForeignKey="true" />
       <Association Name="VatTu_ChiTietSuaChua" Member="VatTu" ThisKey="IDMaVatTu" OtherKey="IDVatTu" Type="VatTu" IsForeignKey="true" />
+      <Association Name="DichVu_ChiTietSuaChua" Member="DichVu" ThisKey="IDTienCong" OtherKey="IDTienCong" Type="DichVu" IsForeignKey="true" />
+      <Association Name="SuaChua_ChiTietSuaChua" Member="SuaChua" ThisKey="IDMaSuaChu" OtherKey="IDMaSuaChua" Type="SuaChua" IsForeignKey="true" />
       <Association Name="User_ChiTietSuaChua" Member="User" ThisKey="IDUser" OtherKey="IDUser" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
@@ -64,8 +78,8 @@
       <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Gia" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TongTien" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="NhapKho_CTNhapKho" Member="NhapKho" ThisKey="IDNhapKho" OtherKey="IDNhapKho" Type="NhapKho" IsForeignKey="true" />
       <Association Name="VatTu_CTNhapKho" Member="VatTu" ThisKey="IDVatTu" OtherKey="IDVatTu" Type="VatTu" IsForeignKey="true" />
+      <Association Name="NhapKho_CTNhapKho" Member="NhapKho" ThisKey="IDNhapKho" OtherKey="IDNhapKho" Type="NhapKho" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.CTTonKho" Member="CTTonKhos">
@@ -79,6 +93,14 @@
       <Association Name="TonKho_CTTonKho" Member="TonKho" ThisKey="IDTonKho" OtherKey="IDTonKho" Type="TonKho" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.DichVu" Member="DichVus">
+    <Type Name="DichVu">
+      <Column Name="IDTienCong" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Ten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GiaTri" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="DichVu_ChiTietSuaChua" Member="ChiTietSuaChuas" ThisKey="IDTienCong" OtherKey="IDTienCong" Type="ChiTietSuaChua" />
+    </Type>
+  </Table>
   <Table Name="dbo.DoanhThu" Member="DoanhThus">
     <Type Name="DoanhThu">
       <Column Name="IDBaoCaoDoanhThu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -87,19 +109,6 @@
       <Column Name="NgayLap" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="NguoiLap" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Association Name="User_DoanhThu" Member="User" ThisKey="IDNguoiDung" OtherKey="IDUser" Type="User" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.TiepNhanXe" Member="TiepNhanXes">
-    <Type Name="TiepNhanXe">
-      <Column Name="IDTiepNhanXe" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="BienSoXe" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="NgayTiepNhan" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="No" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IDKhachHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IDThuongHieuXe" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="TiepNhanXe_SuaChua" Member="SuaChuas" ThisKey="IDTiepNhanXe" OtherKey="IDTiepNhan" Type="SuaChua" />
-      <Association Name="KhachHang_TiepNhanXe" Member="KhachHang" ThisKey="IDKhachHang" OtherKey="IDKhachHang" Type="KhachHang" IsForeignKey="true" />
-      <Association Name="ThuongHieuXe_TiepNhanXe" Member="ThuongHieuXe" ThisKey="IDThuongHieuXe" OtherKey="IDThuongHieuXe" Type="ThuongHieuXe" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.KhachHang" Member="KhachHangs">
@@ -157,30 +166,21 @@
       <Column Name="TenThuongHieu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="ANh" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="ThuongHieuXe_ChiTietDoanhThu" Member="ChiTietDoanhThus" ThisKey="IDThuongHieuXe" OtherKey="IDHangXe" Type="ChiTietDoanhThu" />
-      <Association Name="ThuongHieuXe_TiepNhanXe" Member="TiepNhanXes" ThisKey="IDThuongHieuXe" OtherKey="IDThuongHieuXe" Type="TiepNhanXe" />
       <Association Name="ThuongHieuXe_VatTu" Member="VatTus" ThisKey="IDThuongHieuXe" OtherKey="IDHangXe" Type="VatTu" />
+      <Association Name="ThuongHieuXe_TiepNhanXe" Member="TiepNhanXes" ThisKey="IDThuongHieuXe" OtherKey="IDThuongHieuXe" Type="TiepNhanXe" />
     </Type>
   </Table>
-  <Table Name="dbo.TienCong" Member="TienCongs">
-    <Type Name="TienCong">
-      <Column Name="IDTienCong" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Ten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="GiaTri" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="TienCong_ChiTietSuaChua" Member="ChiTietSuaChuas" ThisKey="IDTienCong" OtherKey="IDTienCong" Type="ChiTietSuaChua" />
-    </Type>
-  </Table>
-  <Table Name="dbo.VatTu" Member="VatTus">
-    <Type Name="VatTu">
-      <Column Name="IDVatTu" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Ten" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Gia" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SoLuong" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Anh" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="IDHangXe" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="VatTu_ChiTietSuaChua" Member="ChiTietSuaChuas" ThisKey="IDVatTu" OtherKey="IDMaVatTu" Type="ChiTietSuaChua" />
-      <Association Name="VatTu_CTNhapKho" Member="CTNhapKhos" ThisKey="IDVatTu" OtherKey="IDVatTu" Type="CTNhapKho" />
-      <Association Name="VatTu_CTTonKho" Member="CTTonKhos" ThisKey="IDVatTu" OtherKey="IDVatTu" Type="CTTonKho" />
-      <Association Name="ThuongHieuXe_VatTu" Member="ThuongHieuXe" ThisKey="IDHangXe" OtherKey="IDThuongHieuXe" Type="ThuongHieuXe" IsForeignKey="true" />
+  <Table Name="dbo.TiepNhanXe" Member="TiepNhanXes">
+    <Type Name="TiepNhanXe">
+      <Column Name="IDTiepNhanXe" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="BienSoXe" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="NgayTiepNhan" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="No" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDKhachHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDThuongHieuXe" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TiepNhanXe_SuaChua" Member="SuaChuas" ThisKey="IDTiepNhanXe" OtherKey="IDTiepNhan" Type="SuaChua" />
+      <Association Name="KhachHang_TiepNhanXe" Member="KhachHang" ThisKey="IDKhachHang" OtherKey="IDKhachHang" Type="KhachHang" IsForeignKey="true" />
+      <Association Name="ThuongHieuXe_TiepNhanXe" Member="ThuongHieuXe" ThisKey="IDThuongHieuXe" OtherKey="IDThuongHieuXe" Type="ThuongHieuXe" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TonKho" Member="TonKhos">
